@@ -1,7 +1,7 @@
 import requests
 from  requests import JSONDecodeError
 from pprint import pprint
-from pydantic import BaseModel,RootModel,Field,field_validator
+from pydantic import BaseModel,RootModel,Field,field_validator # type: ignore
 
 class Site(BaseModel):
     site_name:str = Field(alias='sitename')
