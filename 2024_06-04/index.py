@@ -1,7 +1,7 @@
 from pprint import pprint
 import tkinter as tk
 from tkinter import ttk
-from ttkthemes import ThemedTk
+from ttkthemes import ThemedTk # type: ignore
 import tools
 from tkinter import messagebox
 
