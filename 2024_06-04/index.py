@@ -14,9 +14,9 @@ class Window(ThemedTk):
         style.configure('Top.TFrame',background='#BEC23F')
         style.configure('Top.TLabel',font=('Helvetica',25))
 
-        title_frame = ttk.Frame(self,style='Top.TFrame')
-        ttk.Label(title_frame,text='全台空氣品質指標(AQI)',style='Top.TLabel').pack()
-        title_frame.pack(padx=100,pady=50,ipadx=100,ipady=50)
+        title_frame = ttk.Frame(self,style='Top.TFrame',borderwidth=2,relief='groove')
+        ttk.Label(title_frame,text='全台空氣品質指標(AQI)',style='Top.TLabel').pack(expand=True,fill='y')
+        title_frame.pack(padx=100,pady=100,ipadx=100,ipady=25)
         
 
 
@@ -30,7 +30,7 @@ def main():
         data:list[dict] = tools.get_data(all_data)
         pprint(data)
     '''
-    window = Window(theme="blue")
+    window = Window(theme="arc")
     window.mainloop()
     
 
