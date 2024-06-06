@@ -1,6 +1,6 @@
 import requests
 from  requests import JSONDecodeError
-from pydantic import BaseModel,RootModel,Field,field_validator # type: ignore
+from pydantic import BaseModel,RootModel,Field,field_validator
 from datetime import datetime
 
 class Site(BaseModel):
@@ -44,5 +44,9 @@ def get_data(all_data:dict[any]) -> list[dict]:
     return data
 
 class AQI(object):
+    '''
+    利用class attribute aqi_records儲存下載資料
+    利用class attribute update_time儲存下載時間
+    '''
     aqi_records:list[dict] | None = None
     update_time:datetime | None = None
