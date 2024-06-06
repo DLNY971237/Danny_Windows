@@ -1,6 +1,7 @@
 import requests
 from  requests import JSONDecodeError
 from pydantic import BaseModel,RootModel,Field,field_validator # type: ignore
+from datetime import datetime
 
 class Site(BaseModel):
     site_name:str = Field(alias='sitename')
@@ -41,3 +42,7 @@ def get_data(all_data:dict[any]) -> list[dict]:
     records:Records = Records.model_validate(all_data['records'])
     data:list[dict] = records.model_dump()
     return data
+
+class AQI(object):
+    aqi_records:list[dict] | None = None
+    update_time:datetime | None = None
