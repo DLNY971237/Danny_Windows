@@ -73,7 +73,7 @@ class Window(ThemedTk):
 
 class ShowInfo(Dialog):
     def __init__(self,parent:Misc,title:str|None = None, message:str=""):
-        self.message = message
+        self.message = message #最後才執行
         super().__init__(parent=parent,title=title)
         
 
