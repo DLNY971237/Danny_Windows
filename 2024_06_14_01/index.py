@@ -84,8 +84,6 @@ class Window(ThemedTk):
     
     
 
-
-
 def main():
     window = Window(theme='breeze')
     window.mainloop()
