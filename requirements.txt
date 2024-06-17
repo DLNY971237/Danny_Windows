@@ -2,3 +2,4 @@ pydantic
 requests
 ttkthemes
 tkinter
+tkintermapview
