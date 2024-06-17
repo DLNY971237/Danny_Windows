@@ -1,4 +1,3 @@
-
 from ttkthemes import ThemedTk
 import tkinter as tk
 from tkinter import ttk, messagebox,Misc
@@ -97,6 +96,9 @@ class PieChartFrame(ttk.Frame):
 
     @infos.setter
     def infos(self,datas:list[list]) -> None:
+        for w in self.winfo_children():
+            w.destroy()
+            
         for data in datas:
             sitename:str = data[0]
             area:str = data[1]
