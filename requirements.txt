@@ -1,7 +1,4 @@
 pydantic
 requests
 ttkthemes
-tkintermapview
-matplotlib
-numpy
-pandas
+tkinter

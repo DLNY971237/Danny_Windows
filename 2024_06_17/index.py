@@ -81,24 +81,27 @@ class Window(ThemedTk):
         
             
 
-
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 class PieChartFrame(ttk.Frame):
     def __init__(self,master:Misc,**kwargs):
         super().__init__(master=master,**kwargs)
         self.configure({'borderwidth':2,'relief':'groove'})
         #self.config({'borderwidth':2,'relief':'groove'})        
         #self['borderwidth'] = 2
-        #self['relief'] = 'groove'         
+        #self['relief'] = 'groove'      
 
     @property
     def infos(self)->None:
         return None
-
+    
+    
     @infos.setter
     def infos(self,datas:list[list]) -> None:
         for w in self.winfo_children():
-            w.destroy()
-            
+            w.destroy()        
+
         for data in datas:
             sitename:str = data[0]
             area:str = data[1]
@@ -108,8 +111,53 @@ class PieChartFrame(ttk.Frame):
             rents:int = data[5]
             returns:int = data[6]
             oneFrame = ttk.Frame(self)
-            ttk.Label(oneFrame,text=area).grid(row=0,column=0)
-            oneFrame.pack(side='left')  
+            ttk.Label(oneFrame,text="行政區:").grid(row=0,column=0,sticky='e')
+            ttk.Label(oneFrame,text=area).grid(row=0,column=1,sticky='w')
+
+            ttk.Label(oneFrame,text="站點名稱:").grid(row=1,column=0,sticky='e')
+            ttk.Label(oneFrame,text=sitename).grid(row=1,column=1,sticky='w')
+
+            ttk.Label(oneFrame,text="時間:").grid(row=2,column=0,sticky='e')
+            ttk.Label(oneFrame,text=info_time).grid(row=2,column=1,sticky='w')
+
+            ttk.Label(oneFrame,text="地址:").grid(row=3,column=0,sticky='e')
+            ttk.Label(oneFrame,text=address).grid(row=3,column=1,sticky='w')
+
+            ttk.Label(oneFrame,text="總車輛數:").grid(row=4,column=0,sticky='e')
+            ttk.Label(oneFrame,text=str(total)).grid(row=4,column=1,sticky='w')
+
+            ttk.Label(oneFrame,text="可借:").grid(row=5,column=0,sticky='e')
+            ttk.Label(oneFrame,text=str(rents)).grid(row=5,column=1,sticky='w')
+
+            ttk.Label(oneFrame,text="可還:").grid(row=6,column=0,sticky='e')
+            ttk.Label(oneFrame,text=str(returns)).grid(row=6,column=1,sticky='w')
+
+            def func(pct, allvals):
+                absolute = int(np.round(pct/100.*np.sum(allvals)))
+                return f"{absolute:d}pcs - {pct:.1f}%"
+
+            values = [rents, returns]
+            labels = ['Rend','Return']
+            colors = ['green','red']
+            figure = plt.figure(figsize=(5,5),dpi=72)
+            axes = figure.add_subplot()
+            axes.pie(values,colors=colors,
+                    labels=labels,
+                    labeldistance=0.4,
+                    shadow=True,
+                    autopct=lambda pct: func(pct, values),
+                    textprops=dict(color="white"))
+            
+            canvas = FigureCanvasTkAgg(figure,oneFrame)
+            canvas.draw()
+            canvas.get_tk_widget().grid(row=7,column=0,columnspan=2)
+
+            #顯示後馬上消滅canvas
+            for item in canvas.get_tk_widget().find_all():
+                canvas.get_tk_widget().delete(item)
+            
+
+            oneFrame.pack(side='left',expand=True,fill='both') 
         
 
 
