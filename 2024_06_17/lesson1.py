@@ -10,6 +10,11 @@ class Example(ttk.Frame):
         #self.config({'borderwidth':2,'relief':'groove'})
         #self['borderwidth'] = 2
         #self['relief'] = 'groove'
+        canvas = tk.Canvas(self)
+        canvas.create_line(15,30,200,60)
+        canvas.create_line(300,35,300,200,dash=(50,5))
+        canvas.create_line(55,85,155,85,105,180,55,85)
+        canvas.pack(expand=True,fill='both')
         self.pack(expand=True,fill='both')
 
 def mian():
