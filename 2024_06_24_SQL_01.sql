@@ -28,3 +28,29 @@ CREATE TABLE IF NOT EXISTS student (
     major Varchar(20)
 );
 
+CREATE TABLE IF NOT EXISTS youbike (
+	_id Serial Primary Key,
+	sna VARCHAR (50),
+	ar VARCHAR(100),
+	mday timestamp,
+	rent_bikes SMALLINT,
+	return_bikes SMALLINT,
+	lat REAL,
+	lng REAL
+);
+
+Drop Table youbike;
+
+INSERT INTO youbike(sna,sarea,ar,mday,updatetime,total,rent_bikes,return_bikes,lat,lng,act)
+VALUES ('臺大明達館北側(員工宿舍)',
+	    '臺大公館校區',
+	    '明達館前側北空地',
+	    '2024-06-24 13:58:29',
+	    '2024-06-24 14:21:52',
+	    18,
+	    18,
+	    0,
+	    25.02112,
+	    121.54469,
+	    '1'	
+	);
