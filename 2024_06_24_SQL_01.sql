@@ -22,3 +22,9 @@ VALUES ('John', '學生');
 Drop Table accounts;
 Drop Table student;
 
+CREATE TABLE IF NOT EXISTS student (
+	student_id Serial Primary Key,
+    name Varchar(20) Not Null,
+    major Varchar(20)
+);
+
