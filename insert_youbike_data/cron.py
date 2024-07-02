@@ -1,7 +1,7 @@
 from crontab import CronTab
 import os
 cron = CronTab(user=True)
-path = os.path.abspath("./lesson2.py")
+path = os.path.abspath(".//home/di/Danny_Windows/insert_youbike_data/lesson2.py")
 job = cron.new(command=f"python '{path}'")
 job.minute.every(10)
 cron.write()
