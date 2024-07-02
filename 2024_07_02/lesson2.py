@@ -1,9 +1,12 @@
 import psycopg2
 import data
+import os
+from dotenv import load_dotenv
 
-def main():
-    
-    conn = psycopg2.connect("postgresql://dlny_user:L08USjF3bfhldzrPKtE6UGWRZPXWMbLX@dpg-cpscscl6l47c73e3h1pg-a.singapore-postgres.render.com/dlny")
+load_dotenv()
+
+def main():    
+    conn = psycopg2.connect(os.environ['POSTGRESQL_TOKEN'])
     with conn: #with conn會自動commit(),手動close
         with conn.cursor() as cursor: #自動close()
             sql = '''
@@ -20,7 +23,7 @@ def main():
                 lat REAL,
                 lng REAL,
                 act boolean,
-                UNIQUE(updateTime,sna)
+                UNIQUE (sna, updateTime)
             );
             '''
             cursor.execute(sql)
@@ -31,7 +34,8 @@ def main():
             insert_sql = '''
             INSERT INTO youbike(sna, sarea, ar, mday, updatetime, total, rent_bikes,return_bikes,lat,lng,act)
             VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
-            ON Conflict(sna,updateTime) DO NOTHING;
+            ON CONFLICT (sna, updateTime) 
+			DO NOTHING;
             '''
             for site in all_data:
                 cursor.execute(insert_sql,(site['sna'],
