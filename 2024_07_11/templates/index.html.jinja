@@ -6,9 +6,9 @@
 {% block head%}
 {{ super() }}
 <style type="text/css">
-body {
-    background-color: aqua;
-}
+    body {
+        background-color: aqua;
+    }
 </style>
 {% endblock%}
 
@@ -16,6 +16,13 @@ body {
 {{ left|striptags|title }}
 {% endblock%}
 
+{# 
 {% block right_content%}
-{{ ['list', 'of', 'objects'] |join('|') }}
+<ul>
+    {% for item in ['item1','item2','item3','item4','item5']%}
+    <li>{{item}} </li>
+    {% endfor%}
+</ul>
 {% endblock%}
+
+#}
